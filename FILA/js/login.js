@@ -3,13 +3,31 @@ class checkLogin {
 
         // console.log(this);
         // console.log(this.$('.btnadpt'));
-        this.$('.btnadpt').addEventListener('click', this.sendData.bind(this))
+        this.$('.btnadpt').addEventListener('click', this.sendData.bind(this));
 
+        // console.log(location.search);
+        // console.log(sessionStorage.getItem('url'));
+        // console.log(location.href);
+
+        let search = location.search;
+        let hash = location.hash;
+        // console.log(search);
+        // console.log(hash);
+        // console.log(location.href);
+
+        if (search) {
+            // sessionStorage.getItem('url');
+            if (hash) {
+                this.url = search.split('=')[1] + hash;
+            }
+        } else {
+            this.url = './detail.html';
+        }
 
     }
 
 
-    //*获取input框中的值，通过ajax发送给服务器
+    //*获取input框中的值，通过ajax发送给服务器，判断用户名和密码是否正确。
     sendData() {
         // console.log(this.$('.tel')[1]);
         let username = this.$('.tel').value;
@@ -29,12 +47,15 @@ class checkLogin {
             localStorage.setItem('userId', data.user.id);
             localStorage.setItem('token', data.token);
             // location.assign('./detail.html');
-            let url = sessionStorage.getItem('url');
-            let hrefUrl = url.split('#')[1];
+            // let url = sessionStorage.getItem('url');
+            // let hrefUrl = url.split('#')[1];
             // location.href = `./information.html#` + hrefUrl;
-            if (hrefUrl) { location.href = `./information.html#` + hrefUrl; } else { location.href = './detail.html' }
+            // if (url.split('#')[1]) { location.href = `./information.html#` + (url.split('#')[1]) } else { location.href = './detail.html' }
 
-
+            console.log(this.url);
+            if (this.url) {
+                location.href = this.url;
+            }
 
         })
     }

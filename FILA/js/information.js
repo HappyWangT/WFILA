@@ -1,6 +1,8 @@
 class Information {
     constructor() {
+        // console.log("刷新了")
         this.getInformation();
+        // this.getCartList();
     }
 
     //* 获取页面信息 
@@ -86,7 +88,7 @@ class Information {
                         </ul>
                         <div class="infos-panel">
                             <div class="infos-cell clearfix">
-                                <div class="box-label fl">购买数量<em></em></div>
+                                <div class="box-label fl">购买数量<em>1</em></div>
                                 <div class="pro-num-edit fr"><a href="javascript:;" class="num-ops num-minus">-</a> <input id="selectNum" type="text" class="num-input" value="1"> <a href="javascript:;" class="num-ops num-plus">+</a></div>
                             </div>
                         </div>
@@ -125,13 +127,13 @@ class Information {
         //? 判断是否有token，没有则跳转到登录页面，进行登录 
         if (!token || !userId) {
             this.$('#alert').style.display = 'block';
-
             setTimeout(function() {
-                location.assign('./login.html');
+                location.assign('./login.html?ReturnUrl=./information.html' + location.hash);
                 sessionStorage.setItem('url', location.href);
             }, 2000)
         } else {
             this.addCart();
+
         }
 
     }
@@ -154,25 +156,31 @@ class Information {
             console.log(status, data);
             // if (status != 200 || data.code != 1) return;
             // if (status == 200 && data.code == 401) { location.assign('./login.html'); }
-
+            if (status == 200 && data.code == 1) {
+                this.getCartList();
+            }
             if (data.code != 1) {
 
                 location.hash = goodsId // 将hash值添加到链接的尾部，跳转的时候携带。
 
-                location.href = "./information.html" + location.hash;
-                location.assign('./login.html');
+                // console.log(location.href = "./information.html" + location.hash);
+                // location.href = "./information.html" + location.hash;
+                // sessionStorage.setItem('url', location.href);
+                // location.assign('./login.html');
+
+                location.assign('./login.html?ReturnUrl=./information.html' + location.hash)
 
             }
 
-
-            this.getCartList();
         })
+
     }
 
 
 
     //* 获取购物车列表
     async getCartList() {
+
         this.$('#tankuang').style.opacity = '1';
         // 从地址栏中获取goodsId
         // let gId = location.hash.split('#')[1];
@@ -205,11 +213,11 @@ class Information {
                 <div class="t-num-price">
                     <div>
                         <span class="num-add">-</span>
-                        <input autocomplete="off" class="num-input">
+                        <input autocomplete="off" class="num-input" value="${val.cart_number}">
                         <span class="num-redu">+</span>
                     </div>
-                    <span class="price__symbol">¥${val.current_price}</span>
-                    <span class="price"><del>¥${val.price}</del></span>
+                    <span class="price__symbol">¥${val.current_price*val.cart_number}</span>
+                    <span class="price"><del>¥${val.price*val.cart_number}</del></span>
                 </div>
             </div>
         </div>`

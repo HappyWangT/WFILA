@@ -30,12 +30,13 @@
             <div class="cart-main">
                 <h3 class="cart-title">
                     <span>我的购物车</span>
-                    <i>共 2 件</i>
+
                 </h3>
                 <div class="cart-top">
 
                     <input type="checkbox" name="" id="checkAll" value="" />
-
+                    <span> 全选</span>
+                    <span>商品</span>
                 </div>
 
                 <table class="cart-table">
@@ -104,14 +105,15 @@
                 <div class="cart-foot">
                     <div class="sum-main clearfix w-1280">
                         <div class="sum-infos fl clearfix">
-                            <div class="sum-operate fl">
+                            <!-- <div class="sum-operate fl">
                                 <input type="checkbox" name="" id="checkA" value="" />
                                 <i></i><span>全选商品</span>
-                                <a href="javascript:;" class="delete-multi">删除商品</a></div>
+                                <a href="javascript:;" class="delete-multi">删除商品</a></div> -->
                             <div class="sum-totalprice fr">
-                                <span>总价</span>
-
-                                <span class=" subtotal ">&yen;0.00</span>
+                                <p>共计&nbsp;&nbsp;&nbsp;&nbsp;<span class="cartnum"></span>&nbsp;&nbsp;&nbsp;&nbsp;件</p>
+                                <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;总价</p>
+                                <p>&nbsp;&nbsp;￥</p>
+                                <p class=" subtotal ">0.00</p>
                             </div>
                         </div>
                         <div class="sum-to-settle fl"><a href="javascript:;" class="btn-to-settle">结算</a></div>
@@ -144,6 +146,8 @@
     <div class="web-cover">
         <a class="cover-kefu" href="" title="在线客服">客服</a>
     </div>
+    <script src="./lib/jquery-2.2.4.js"></script>
+    <script src="./lib/layer/layer.js"></script>
     <script src="./js/axios.js"></script>
     <script src="./js/cart.js"></script>
 </body>

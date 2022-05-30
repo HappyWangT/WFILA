@@ -1,7 +1,7 @@
 module.exports = {
     // 免密登录保持时间, 单位: 秒(s)
-    tokenKeep: 60 * 1,
-    // token 的签证字符串, 可以自主更改
+    tokenKeep: 60 * 60,
+    // 自主更改
     tokenSignkey: 'guoxiang',
     // 用户名的正则, 可以自主更改
     username: /^[a-z0-9]\w{4,11}$/,

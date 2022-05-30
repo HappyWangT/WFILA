@@ -28,7 +28,7 @@ a {
     left: 0;
     top: 0;
     z-index: 999;
-    background-color: transparent
+    background-color: white
 }
 
 .header .logo {
@@ -736,15 +736,16 @@ img {
     position: fixed;
     top: 70px;
     right: 70px;
-    overflow: auto;
     width: 350px;
-    height: 330px;
+    /* height: 330px; */
     box-shadow: -1px 1px 8px rgb(196, 188, 188);
 }
 
 #cartinfo {
-    /* width: 350px;
-    height: 330px; */
+    width: 350px;
+    height: 330px;
+    background-color: #fff;
+    overflow: auto;
     z-index: 9999;
     transition: all 0.5s;
 }
@@ -848,7 +849,7 @@ img {
     height: 20px;
     display: inline-block;
     outline: none;
-    padding: 0px 28px;
+    padding: 0px 25px;
 }
 
 .t-num-price>div {

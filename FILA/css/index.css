@@ -797,3 +797,154 @@ img {
     background: url(../img/common-pc.png) 24px -33px no-repeat;
     background-size: 22px auto
 }
+
+.news-container {
+    padding: 0 10px;
+    padding-bottom: 60px;
+    margin: 0 auto;
+    width: 80%;
+}
+
+.swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    background: #fff;
+    padding: 0 5px;
+}
+
+.new-title {
+    margin-top: 35px;
+    padding-bottom: 45px;
+    font-weight: 700;
+    font-size: 34px;
+    text-align: center;
+}
+
+.swiper-slide-wrap {
+    width: 100%;
+    padding: 15px;
+    transition: 0.4s;
+    transform: translateY(0px);
+}
+
+.swiper-slide-wrap>a {
+    display: block;
+}
+
+.banner-wrap-content:hover,
+.swiper-slide-wrap:hover {
+    transition: 0.4s;
+    cursor: pointer;
+    transform: translateY(-5px);
+    box-shadow: 0 0 10px 1px hsla(0, 0%, 61%, .4);
+}
+
+.swiper-slide-banner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+
+.swiper-slide-content {
+    margin-top: 12px;
+    font-size: 20px;
+    text-align: left;
+}
+
+.swiperContent {
+    position: relative;
+}
+
+.banner:after {
+    content: "";
+    display: block;
+    height: 0;
+    visibility: hidden;
+    clear: both;
+}
+
+.banner-wrap {
+    padding: 0 5px;
+    width: 33.33%;
+    float: left;
+    min-height: 220px;
+}
+
+.banner-wrap>a {
+    display: block;
+}
+
+.banner-wrap-content {
+    padding: 15px;
+    transition: 0.4s;
+    transform: translateY(0px);
+}
+
+.swiper-next-slide {
+    position: absolute;
+    top: 50%;
+    right: -5px;
+    width: 18px;
+    height: 44px;
+    margin-top: -40px;
+    z-index: 10;
+    cursor: pointer;
+    background: rgba(0, 0, 0, 0.15);
+}
+
+.swiper-next-slide:before {
+    position: absolute;
+    content: '';
+    height: 9px;
+    width: 9px;
+    border-left: 2px solid #fff;
+    border-bottom: 2px solid #fff;
+    transform: rotate(-135deg);
+    top: 14px;
+    left: 0;
+}
+
+.swiper-prev-slide {
+    position: absolute;
+    top: 50%;
+    left: -5px;
+    width: 18px;
+    height: 44px;
+    margin-top: -40px;
+    z-index: 10;
+    cursor: pointer;
+    background: rgba(0, 0, 0, 0.15);
+}
+
+.swiper-prev-slide::before {
+    position: absolute;
+    content: '';
+    height: 9px;
+    width: 9px;
+    border-left: 2px solid #fff;
+    border-bottom: 2px solid #fff;
+    transform: rotate(45deg);
+    top: 14px;
+    left: 7px;
+}
+
+.swiper-next-slide:hover,
+.swiper-prev-slide:hover {
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.swiper-slide-wrap-block {
+    width: 100%;
+    padding-top: 75%;
+    position: relative;
+    overflow: hidden;
+}
+
+.ql-editor {
+    font-size: 16px;
+}
+
+.ql-editor em {
+    font-weight: bold;
+}
