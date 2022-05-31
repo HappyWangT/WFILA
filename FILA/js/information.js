@@ -142,7 +142,8 @@ class Information {
         let numVal = num--;
         this.$('#selectNum').value = numVal;
         if (numVal < 1) {
-            alert('数量不能小于1！')
+            alert('数量不能小于1！');
+            this.$('#selectNum').value = 1
         }
     }
 
@@ -163,7 +164,9 @@ class Information {
                 sessionStorage.setItem('url', location.href);
             }, 2000)
         } else {
-            this.addCart();
+            let num = this.$('#selectNum').value;
+            // console.log(num);
+            this.addCart(num);
 
         }
 
@@ -171,7 +174,7 @@ class Information {
 
 
     //* 加入购物车
-    addCart() {
+    addCart(num) {
         let goodsId = location.href.split("#")[1];
         let userId = localStorage.getItem('userId');
         let param = `id=${userId}&goodsId=${goodsId}`;
@@ -186,7 +189,7 @@ class Information {
             // if (status != 200 || data.code != 1) return;
             // if (status == 200 && data.code == 401) { location.assign('./login.html'); }
             if (status == 200 && data.code == 1) {
-                this.getCartList();
+                this.getCartList(num);
             }
             if (data.code != 1) {
 
@@ -204,9 +207,9 @@ class Information {
 
 
     //* 获取购物车列表
-    async getCartList() {
-
-        this.$('#tankuang').style.opacity = '1';
+    async getCartList(num) {
+        console.log(num);
+        this.$('#tankuang').style.display = 'block';
         // 从地址栏中获取goodsId
         // let gId = location.hash.split('#')[1];
         // console.log(gId);
@@ -245,8 +248,10 @@ class Information {
                     <span class="price"><del>¥${val.price*val.cart_number}</del></span>
                 </div>
             </div>
-        </div>`
+        </div>`;
+            // this.$('.num-input').value = val.cart_number + num;
         })
+
         this.$('#cartinfo').innerHTML = html;
         // console.log(html);
         this.$('.view-cart').addEventListener('click', function() {

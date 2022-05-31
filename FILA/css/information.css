@@ -547,6 +547,7 @@ img {
 }
 
 .fr {
+    cursor: pointer;
     line-height: 18px;
     margin-top: 7px;
     color: #888;
@@ -730,7 +731,8 @@ img {
 
 #tankuang {
     z-index: 9999;
-    opacity: 0;
+    /* opacity: 0; */
+    display: none;
     transition: all 0.5s;
     background-color: #fff;
     position: fixed;
