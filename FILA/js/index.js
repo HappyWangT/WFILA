@@ -8,13 +8,10 @@
  let box = next.parentNode;
  // console.log(box);
 
-
-
  // 设置上一张图片的索引————需要隐藏进去的图片
  let lastIndex = 0;
  // 设置当前图片的索引————需要显示出来的图片
  let index = 0;
-
 
  // 1、实现通过ol里面的li来切换图片
 
@@ -36,7 +33,6 @@
      }
  })
 
-
  // 2、通过按钮实现图片切换
 
  // 向前切换
@@ -54,7 +50,6 @@
      change()
  }
 
-
  // 向后切换
  next.onclick = function() {
      // 将当前图片的索引给上一张图片，
@@ -66,8 +61,6 @@
      if (index > ulLis.length - 1) index = 0;
      change()
  }
-
-
 
  // 3、设置图片自动切换
 
@@ -84,11 +77,6 @@
  }
  // 调用函数
  autoPlay()
-
-
-
-
-
 
  // 设置切换时的函数，因为需要设置很多次，所以单独写一个函数，谁需要谁调用
  function change() {

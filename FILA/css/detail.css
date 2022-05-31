@@ -112,6 +112,7 @@ a {
 }
 
 .content {
+    padding-bottom: 50px;
     width: 100%;
     min-height: calc(100vh - 50px);
     position: relative;
@@ -580,9 +581,30 @@ img {
     display: block
 }
 
-.list-pagination>.page-btn {
+.prev,
+.next {
+    color: #ccc;
+    font-size: 20px;
+}
+
+.total {
+    color: #666;
+}
+
+.pageBox {
+    height: 40px;
+    line-height: 50px;
+    margin-left: 820px;
+    float: left;
+}
+
+.page-btn {
+    cursor: pointer;
+    padding: 5px;
+    font-size: 27px;
+    width: 36px;
     height: 36px;
-    line-height: 34px;
+    line-height: 36px;
     vertical-align: middle;
     width: 40px;
     border: 1px solid #ccc;
@@ -778,6 +800,7 @@ img {
 }
 
 .footer {
+    /* margin-top: 30px; */
     height: 50px;
     line-height: 50px;
     padding: 0 60px;

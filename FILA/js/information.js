@@ -88,7 +88,7 @@ class Information {
                         </ul>
                         <div class="infos-panel">
                             <div class="infos-cell clearfix">
-                                <div class="box-label fl">购买数量<em>1</em></div>
+                                <div class="box-label fl">购买数量</div>
                                 <div class="pro-num-edit fr"><a href="javascript:;" class="num-ops num-minus">-</a> <input id="selectNum" type="text" class="num-input" value="1"> <a href="javascript:;" class="num-ops num-plus">+</a></div>
                             </div>
                         </div>
@@ -109,11 +109,42 @@ class Information {
         </div>`
 
         this.$('.content').innerHTML = html;
+        // 放大镜
         this.bigImg();
+        // 点击 加入购物车。判断登录状态
         this.$('.btn-addCart').addEventListener('click', this.changeHandler.bind(this));
+        // 点击 立即购买，判断登录状态
         this.$('.btn-toBuy').addEventListener('click', this.changeHandler.bind(this));
+        // 点击 - 按钮，进行数量的减
+        this.$('.num-minus').addEventListener('click', this.numRedu.bind(this));
+        // 点击 + 按钮，进行数量的加
+        this.$('.num-plus').addEventListener('click', this.numPlus.bind(this));
     }
 
+    //* 数量的加
+    numPlus() {
+        let div = this.$('.pro-num-edit');
+        // console.log(div);
+        let num = div.querySelector('input').value - 0;
+        // console.log(num);
+        // let plus = div.querySelector('.num-plus');
+        num++;
+        let numVal = num++;
+        // console.log(num++);
+        this.$('#selectNum').value = numVal;
+    }
+
+    //* 数量的减
+    numRedu() {
+        let div = this.$('.pro-num-edit');
+        let num = div.querySelector('input').value - 0;
+        num--;
+        let numVal = num--;
+        this.$('#selectNum').value = numVal;
+        if (numVal < 1) {
+            alert('数量不能小于1！')
+        }
+    }
 
     //* 判断登录状态
     changeHandler() {
@@ -143,17 +174,15 @@ class Information {
     addCart() {
         let goodsId = location.href.split("#")[1];
         let userId = localStorage.getItem('userId');
-
         let param = `id=${userId}&goodsId=${goodsId}`;
 
         const TOKEN = localStorage.getItem('token');
         axios.defaults.headers.common['authorization'] = TOKEN;
         // 注意要发送post请请求
-
         axios.defaults.headers['Content-Type'] = 'application/x-www-form-urlencoded';
 
         axios.post('http://localhost:8888/cart/add', param).then(({ status, data }) => {
-            console.log(status, data);
+            // console.log(status, data);
             // if (status != 200 || data.code != 1) return;
             // if (status == 200 && data.code == 401) { location.assign('./login.html'); }
             if (status == 200 && data.code == 1) {
@@ -169,13 +198,9 @@ class Information {
                 // location.assign('./login.html');
 
                 location.assign('./login.html?ReturnUrl=./information.html' + location.hash)
-
             }
-
         })
-
     }
-
 
 
     //* 获取购物车列表

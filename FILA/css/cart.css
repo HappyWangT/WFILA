@@ -464,3 +464,9 @@ a.num-plus {
     background: url(../img/common-pc.png) 24px -33px no-repeat;
     background-size: 22px auto
 }
+
+.num-minus,
+.num-plus {
+    line-height: 1;
+    padding: 3px;
+}

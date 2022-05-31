@@ -30,10 +30,15 @@ class getCart {
     oneCheckedWithAll(status) {
         // console.log(this.$('.checkList'));
         //? 循环单选按钮，将状态设置成全选按钮的状态
-        this.$('.checkList').forEach(input => {
-            // console.log(input);
-            input.checked = status;
-        })
+        if (Array.from(this.$('.checkList')).length > 1) {
+            this.$('.checkList').forEach(input => {
+                // console.log(input);
+                input.checked = status;
+            })
+        } else {
+            this.$('.checkList').checked = status;
+        }
+
     }
 
     //* 单选的实现
@@ -101,67 +106,15 @@ class getCart {
             this.cartDel(target);
         }
 
-    }
+        //? 判断当前点击的是否是 +
+        if (target.nodeName == 'BUTTON' && target.classList.contains('num-plus')) {
+            this.plusGoodsNum(target);
+        }
 
-
-    //* 获取购物车列表
-    async getCartList() {
-        // 从地址栏中获取goodsId
-        // let gId = location.hash.split('#')[1];
-        // console.log(gId);
-        const TOKEN = localStorage.getItem('token');
-        axios.defaults.headers.common['authorization'] = TOKEN;
-        axios.defaults.headers['Content-Type'] = 'application/x-www-form-urlencoded';
-        let { status, data } = await axios.get('http://localhost:8888/cart/list', {
-            params: {
-                id: localStorage.getItem('userId')
-            }
-        });
-        // console.log(res);
-        // console.log(data);
-        let html = '';
-        // console.log(status, data)
-
-        data.cart.forEach(val => {
-            // console.log(val);
-            html += `<tr class="goods-item" data-id="${val.goods_id}">
-            <td class="td-check">
-                <input type="checkbox" name="" class="checkList" value="" />
-            </td>
-            <td class="td-img">
-                    <img src="${val.img_small_logo}" alt="">
-            </td>
-            <td class="td-infos">
-                <div class="td-infos-top clearfix">
-                    <div class="fl">
-                        <h5>${val.title}</h5>
-                        <p><span>颜色:匀乳白;尺码:M</span></p>
-                    </div>
-                    <div class="fr">
-                          <span>￥${val.current_price}</span>
-                        <span class="infos-price  price">小计：￥<i class="xiaoji">${val.current_price *val.cart_number}</i></span>
-                        <span class="infos-mktprice">￥${val.price*val.cart_number}</span></div>
-                </div>
-                <div class="td-infos-bot clearfix">
-                    <p class="fl"><span>数量：</span>
-                       
-                        <button class="remove num-minus ">-</button>
-                        <span class="num-input  num">${val.cart_number}</span>
-                        <button class=" num-plus  add">+</button>
-                    </p>
-                    <p class="fr delete-one">
-                       删除</p>
-                </div>
-            </td>
-        </tr>`;
-
-        })
-        this.$('.cart-table').innerHTML = html;
-
-        //? 等待html加载完成之后，才能实现
-        //? 单选按钮事件绑定 
-        this.oneChecked();
-
+        //? 判断当前点击的是否是 -
+        if (target.nodeName == 'BUTTON' && target.classList.contains('num-minus')) {
+            this.reduceGoodsNum(target);
+        }
     }
 
     //* 统计数量和价格
@@ -203,6 +156,152 @@ class getCart {
         this.$('.cartnum').innerHTML = num;
         this.$('.subtotal').innerHTML = sum;
     }
+
+    //* 数量减少的方法 
+    reduceGoodsNum = (tar) => {
+        // 获取tr
+        let tr = tar.parentNode.parentNode.parentNode.parentNode;
+        // console.log(tr);
+        // 获取数量，单价，小计
+        let num = tr.querySelector('.num-input').innerHTML - 0;
+        // console.log(num);
+        let xiaoji = tr.querySelector('.xiaoji').innerHTML - 0;
+        // console.log(xiaoji);
+        let danjia = tr.querySelector('.danjia').innerHTML - 0;
+        // console.log(danjia);
+
+        // 获取数量
+        // console.log(num);
+        let numInnerHTML = num;
+        // console.log(numInnerHTML);
+        // 对数量进行加1操作
+        numInnerHTML--;
+        // console.log(num);
+        // 更新input中的数量
+        // 给服务器发送数据，增加数量
+        const TOKEN = localStorage.getItem('token');
+        axios.defaults.headers.common['authorization'] = TOKEN;
+        axios.defaults.headers['Content-Type'] = 'application/x-www-form-urlencoded';
+
+        let uId = localStorage.getItem('userId');
+        let gId = tr.dataset.id;
+
+        let param = `id=${uId}&goodsId=${gId}&number=${numInnerHTML}`
+        axios.post('http://localhost:8888/cart/number', param).then(({ status, data }) => {
+            // console.log(res);
+            if (status == 200 && data.code == 1) {
+                // 将更新之后的数量设置回去
+                tr.querySelector('.num-input').innerHTML = numInnerHTML;
+                tr.querySelector('.xiaoji').innerHTML = parseInt(numInnerHTML * danjia) * 100 / 100;
+
+                this.countSumPrice();
+            }
+        })
+    }
+
+    //* 数量增加的方法 
+    plusGoodsNum = (tar) => {
+        // console.log(tar);
+        // 获取tr
+        let tr = tar.parentNode.parentNode.parentNode.parentNode;
+        // console.log(tr);
+        // 获取数量，单价，小计
+        let num = tr.querySelector('.num-input').innerHTML - 0;
+        // console.log(num);
+        let xiaoji = tr.querySelector('.xiaoji').innerHTML - 0;
+        // console.log(xiaoji);
+        let danjia = tr.querySelector('.danjia').innerHTML - 0;
+        // console.log(danjia);
+
+        // 获取数量
+        // console.log(num);
+        let numInnerHTML = num;
+        // console.log(numInnerHTML);
+        // 对数量进行加1操作
+        numInnerHTML++;
+        // console.log(num);
+        // 更新input中的数量
+        // 给服务器发送数据，增加数量
+        const TOKEN = localStorage.getItem('token');
+        axios.defaults.headers.common['authorization'] = TOKEN;
+        axios.defaults.headers['Content-Type'] = 'application/x-www-form-urlencoded';
+
+        let uId = localStorage.getItem('userId');
+        let gId = tr.dataset.id;
+
+        let param = `id=${uId}&goodsId=${gId}&number=${numInnerHTML}`
+        axios.post('http://localhost:8888/cart/number', param).then(({ status, data }) => {
+            // console.log(res);
+            if (status == 200 && data.code == 1) {
+                // 将更新之后的数量设置回去
+                tr.querySelector('.num-input').innerHTML = numInnerHTML;
+                tr.querySelector('.xiaoji').innerHTML = parseInt(numInnerHTML * danjia) * 100 / 100;
+
+                this.countSumPrice();
+            }
+        })
+    }
+
+    //* 获取购物车列表
+    async getCartList() {
+        // 从地址栏中获取goodsId
+        // let gId = location.hash.split('#')[1];
+        // console.log(gId);
+        const TOKEN = localStorage.getItem('token');
+        axios.defaults.headers.common['authorization'] = TOKEN;
+        axios.defaults.headers['Content-Type'] = 'application/x-www-form-urlencoded';
+        let { status, data } = await axios.get('http://localhost:8888/cart/list', {
+            params: {
+                id: localStorage.getItem('userId')
+            }
+        });
+        // console.log(res);
+        // console.log(data);
+        let html = '';
+        // console.log(status, data)
+
+        data.cart.forEach(val => {
+            // console.log(val);
+            html += `<tr class="goods-item" data-id="${val.goods_id}">
+            <td class="td-check">
+                <input type="checkbox" name="" class="checkList" value="" />
+            </td>
+            <td class="td-img">
+                    <img src="${val.img_small_logo}" alt="">
+            </td>
+            <td class="td-infos">
+                <div class="td-infos-top clearfix">
+                    <div class="fl">
+                        <h5>${val.title}</h5>
+                        <p><span>颜色:匀乳白;尺码:M</span></p>
+                    </div>
+                    <div class="fr">
+                          <span>￥<i class="danjia">${val.current_price}</i></span>
+                        <span class="infos-price  price">小计：￥<i class="xiaoji">${val.current_price *val.cart_number}</i></span>
+                        <span class="infos-mktprice">￥${val.price*val.cart_number}</span></div>
+                </div>
+                <div class="td-infos-bot clearfix">
+                    <p class="fl"><span>数量：</span>
+                       
+                        <button class="remove num-minus ">-</button>
+                        <span class="num-input  num">${val.cart_number}</span>
+                        <button class=" num-plus  add">+</button>
+                    </p>
+                    <p class="fr delete-one">
+                       删除</p>
+                </div>
+            </td>
+        </tr>`;
+
+        })
+        this.$('.cart-table').innerHTML = html;
+
+        //? 等待html加载完成之后，才能实现
+        //? 单选按钮事件绑定 
+        this.oneChecked();
+
+    }
+
 
     //* 购物车删除，需要用户id，商品id
     cartDel(tar) {

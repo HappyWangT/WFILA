@@ -645,13 +645,15 @@ img {
 /*footer*/
 
 .footer {
+    /* position: fixed;
+    bottom: 0px; */
     height: 50px;
     line-height: 50px;
     padding: 0 60px;
     background: #03234c;
     color: #fff;
     font-size: 13px;
-    /* width: 100%; */
+    width: 100%;
     display: flex;
     justify-content: space-between;
 }
@@ -947,4 +949,56 @@ img {
 
 .ql-editor em {
     font-weight: bold;
+}
+
+.imgul {
+    margin-top: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.new-title>h4 {
+    margin-bottom: 40px;
+}
+
+.imgul li {
+    cursor: pointer;
+    margin-bottom: 50px;
+    /* width: 500px; */
+    height: 330px;
+}
+
+.imgul li:hover {
+    transform: translateY(-5px);
+    z-index: 100;
+    height: 310px;
+    box-shadow: 0 0 10px 1px rgb(156 156 156/40%)
+}
+
+.imglist img {
+    width: 380px;
+    height: 250px;
+}
+
+.imgul li p {
+    font-size: 20px;
+    line-height: 40px;
+}
+
+.gotop {
+    cursor: pointer;
+    transform: linear, 2s;
+    position: fixed;
+    right: 0px;
+    bottom: 100px;
+    opacity: 0;
+    width: 118px;
+    height: 40px;
+    line-height: 40px;
+    color: black;
+    text-align: center;
+    border: 1px solid black;
+    border-right: 0;
+    background-color: white;
 }
