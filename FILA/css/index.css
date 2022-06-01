@@ -650,6 +650,7 @@ img {
     height: 50px;
     line-height: 50px;
     padding: 0 60px;
+    box-sizing: border-box;
     background: #03234c;
     color: #fff;
     font-size: 13px;

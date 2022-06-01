@@ -1,5 +1,6 @@
 class getCart {
     constructor() {
+        this.judge();
         this.getCartList()
 
         // 给.cart-table 绑定点击事件，进行分发
@@ -9,6 +10,44 @@ class getCart {
         this.$('#checkAll').addEventListener('click', this.checkAll);
 
 
+    }
+
+    // 判断是否登录成功，如果成功，将信息显示出来
+    judge() {
+        // console.log(111);
+        let token = localStorage.getItem('token');
+        // console.log(token);
+        if (token) {
+            this.$('.login').style.display = 'block';
+            this.$('.header-list').style.display = 'none';
+        }
+        this.$('.out').addEventListener('click', this.tk.bind(this))
+    }
+
+    //* 确认删除的弹框 
+    tk() {
+        let login = this.$('.login');
+        let list = this.$('.header-list');
+        //? 点击删除按钮的弹出框
+        layer.confirm('确定要退出登录吗', {
+            title: '退出登录提示框'
+        }, function() { // 确认的回调函数
+            // const TOKEN = localStorage.getItem('token');
+            // axios.defaults.headers.common['authorization'] = TOKEN;
+            // axios.defaults.headers['Content-Type'] = 'application/x-www-form-urlencoded';
+
+            let id = localStorage.getItem('userId');
+            // console.log(id);
+            axios.get(`http://localhost:8888/users/logout/${id}`).then(res => {
+                // console.log(res);
+                //? 关闭弹出框 
+                layer.closeAll();
+                login.style.display = 'none';
+                list.style.display = 'block';
+                localStorage.removeItem('token');
+                localStorage.removeItem('userId');
+            })
+        })
     }
 
     //* 全选的实现

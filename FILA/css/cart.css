@@ -470,3 +470,26 @@ a.num-plus {
     line-height: 1;
     padding: 3px;
 }
+
+.header-right .login {
+    display: none;
+    padding: 0px 20px;
+    cursor: pointer;
+    border-radius: 20px;
+    /* background-color: rgb(219, 214, 214); */
+    float: right;
+    height: 50px;
+    line-height: 50px;
+    margin-top: 20px;
+    width: 200px;
+}
+
+.welcome {
+    float: left;
+}
+
+.out {
+    font-weight: 900;
+    float: right;
+    color: rgb(177, 14, 14);
+}

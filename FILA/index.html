@@ -245,7 +245,7 @@
                 <ul class="header-tool-user clearfix">
                     <li class="user-help"><a href="./detail.html" target="_blank" title="帮助">帮助</a></li>
                     <li class="user-login"><a href="./login.html" target="_blank" title="登录">登录</a></li>
-                    <li class="user-register"><a href="./detail.html" target="_blank" title="注册">注册</a></li>
+                    <li class="user-register"><a href="./register.html" target="_blank" title="注册">注册</a></li>
                 </ul>
             </div>
         </div>
@@ -354,8 +354,7 @@
         // 总页数
 
         var total = Math.ceil(list.length / pagesize);
-        console.log(total);
-
+        // console.log(total);
 
         window.addEventListener('scroll', lazyLoader)
 
@@ -385,7 +384,6 @@
             if ((window_height + scroll_top) > (1035 + ul_height)) {
 
                 // 需要使用节流阀
-                console.log('aaaaaa');
                 // 如果是锁住的状态，就结束代码执行
                 if (lock) return;
                 // 将锁的状态设置成true 
@@ -403,7 +401,7 @@
         // console.log(list);
 
         function bindHtml(current = 1) {
-            console.log(111);
+            // console.log(111);
             var bindList = list.slice((current - 1) * pagesize, current * pagesize);
             let html;
             // reduce 累加
@@ -414,7 +412,7 @@
                           </li>`
             }, '')
             let top = document.querySelector('.gotop')
-            console.log(top);
+                // console.log(top);
             top.style.opacity = '1';
             top.onclick = function() {
                 // window.scrollTo({

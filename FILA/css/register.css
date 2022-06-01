@@ -350,3 +350,19 @@ a.verify-sendbtn {
     background: url(../img/common-pc.png) 24px -33px no-repeat;
     background-size: 22px auto
 }
+
+#alert {
+    width: 200px;
+    height: 50px;
+    position: fixed;
+    z-index: 999;
+    top: 430px;
+    font-size: 16px;
+    line-height: 50px;
+    text-align: center;
+    border-radius: 10px;
+    left: calc(50% - 50px);
+    color: #f7f7f7;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: none;
+}

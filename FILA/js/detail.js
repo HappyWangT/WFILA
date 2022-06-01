@@ -1,7 +1,9 @@
 class List {
     constructor() {
+        this.judge();
         this.getData();
-        this.$('.goods-list').addEventListener('click', this.goodsHref)
+        this.$('.goods-list').addEventListener('click', this.goodsHref);
+        this.$('.cartIcon').addEventListener('click', this.getCartData.bind(this));
     }
     prevBtn = document.querySelector(".prev");
     totalBtn = document.querySelector(".total");
@@ -11,6 +13,44 @@ class List {
     total;
     data = '';
     lock = false;
+
+    // 判断是否登录成功，如果成功，将信息显示出来
+    judge() {
+        // console.log(111);
+        let token = localStorage.getItem('token');
+        // console.log(token);
+        if (token) {
+            this.$('.login').style.display = 'block';
+            this.$('.header-list').style.display = 'none';
+        }
+        this.$('.out').addEventListener('click', this.tk.bind(this))
+    }
+
+    //* 确认删除的弹框 
+    tk() {
+        let login = this.$('.login');
+        let list = this.$('.header-list');
+        //? 点击删除按钮的弹出框
+        layer.confirm('确定要退出登录吗', {
+            title: '退出登录提示框'
+        }, function() { // 确认的回调函数
+            // const TOKEN = localStorage.getItem('token');
+            // axios.defaults.headers.common['authorization'] = TOKEN;
+            // axios.defaults.headers['Content-Type'] = 'application/x-www-form-urlencoded';
+
+            let id = localStorage.getItem('userId');
+            // console.log(id);
+            axios.get(`http://localhost:8888/users/logout/${id}`).then(res => {
+                // console.log(res);
+                //? 关闭弹出框 
+                layer.closeAll();
+                login.style.display = 'none';
+                list.style.display = 'block';
+                localStorage.removeItem('token');
+                localStorage.removeItem('userId');
+            })
+        })
+    }
 
     //* 下一页按钮
     nextHandler() {
@@ -73,7 +113,6 @@ class List {
 
         // this.$('.goods-list').innerHTML += html;
 
-
     }
 
     //* 准备一个渲染函数，专门用来渲染页面
@@ -121,9 +160,57 @@ class List {
 
 
 
+    async getCartData() {
+        // console.log(11);
+        this.$('#tankuang').style.display = 'block';
+        // 从地址栏中获取goodsId
+        // let gId = location.hash.split('#')[1];
+        // console.log(gId);
+        const TOKEN = localStorage.getItem('token');
+        axios.defaults.headers.common['authorization'] = TOKEN;
+        axios.defaults.headers['Content-Type'] = 'application/x-www-form-urlencoded';
+        let { data } = await axios.get('http://localhost:8888/cart/list', {
+            params: {
+                id: localStorage.getItem('userId')
+            }
+        });
+        // console.log(res);
+        // console.log(data);
+        let html = '';
+
+        data.cart.forEach(val => {
+            // console.log(val);
+            html += ` <div class="goods-item mini-cart">
+            <div class="goods-item__img">
+            <img src="${val.img_small_logo}"></div>
+            <div class="goods-item__right">
+                <div class="goods-item__title">
+                    <span>${val.title}</span>
+                </div>
+                <div class="goods-item__specs">
+                    <span class="goods-item__specs-color">卡其色</span>
+                    <span class="goods-item__specs-size">S</span></div>
+
+                <div class="t-num-price">
+                    <div>
+                        <span class="num-add">-</span>
+                        <input autocomplete="off" class="num-input" value="${val.cart_number}">
+                        <span class="num-redu">+</span>
+                    </div>
+                    <span class="price__symbol">¥${val.current_price*val.cart_number}</span>
+                    <span class="price"><del>¥${val.price*val.cart_number}</del></span>
+                </div>
+            </div>
+        </div>`;
+            // this.$('.num-input').value = val.cart_number + num;
+        })
+
+        this.$('#cartinfo').innerHTML = html;
+    }
+
+
     //* 跳转页面
     goodsHref = (eve) => {
-
         console.log(eve.target.nodeName);
         // console.log(eve.target.dataset.id);
         // location.assign('./information.html')

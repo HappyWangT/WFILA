@@ -51,7 +51,7 @@ a {
 .header .header-right {
     float: right;
     height: 100px;
-    margin-right: 60px;
+    /* margin-right: 60px; */
     z-index: 1
 }
 
@@ -583,25 +583,25 @@ img {
 
 .prev,
 .next {
-    color: #ccc;
+    color: #666;
     font-size: 20px;
 }
 
 .total {
-    color: #666;
+    color: #ccc;
 }
 
 .pageBox {
     height: 40px;
     line-height: 50px;
-    margin-left: 820px;
+    margin-left: 720px;
     float: left;
 }
 
 .page-btn {
     cursor: pointer;
     padding: 5px;
-    font-size: 27px;
+    font-size: 16px;
     width: 36px;
     height: 36px;
     line-height: 36px;
@@ -929,4 +929,27 @@ img {
     background: url(https://img01.fila.cn/theme_fl/images/icons/common-pc.png) no-repeat;
     background-size: 22px auto;
     background-position: 24px -33px;
+}
+
+.header-right .login {
+    display: none;
+    padding: 0px 20px;
+    cursor: pointer;
+    border-radius: 20px;
+    /* background-color: rgb(219, 214, 214); */
+    float: right;
+    height: 50px;
+    line-height: 50px;
+    margin-top: 20px;
+    width: 200px;
+}
+
+.welcome {
+    float: left;
+}
+
+.out {
+    font-weight: 900;
+    float: right;
+    color: rgb(177, 14, 14);
 }

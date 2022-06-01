@@ -1,9 +1,50 @@
 class Information {
     constructor() {
+        this.judge();
         // console.log("刷新了")
         this.getInformation();
         // this.getCartList();
     }
+
+    // 判断是否登录成功，如果成功，将信息显示出来
+    judge() {
+        // console.log(111);
+        let token = localStorage.getItem('token');
+        // console.log(token);
+        if (token) {
+            this.$('.login').style.display = 'block';
+            this.$('.header-list').style.display = 'none';
+        }
+        this.$('.out').addEventListener('click', this.tk.bind(this))
+    }
+
+    //* 确认删除的弹框 
+    tk() {
+        let login = this.$('.login');
+        let list = this.$('.header-list');
+        //? 点击删除按钮的弹出框
+        layer.confirm('确定要退出登录吗', {
+            title: '退出登录提示框'
+        }, function() { // 确认的回调函数
+            // const TOKEN = localStorage.getItem('token');
+            // axios.defaults.headers.common['authorization'] = TOKEN;
+            // axios.defaults.headers['Content-Type'] = 'application/x-www-form-urlencoded';
+
+            let id = localStorage.getItem('userId');
+            // console.log(id);
+            axios.get(`http://localhost:8888/users/logout/${id}`).then(res => {
+                // console.log(res);
+                //? 关闭弹出框 
+                layer.closeAll();
+                login.style.display = 'none';
+                list.style.display = 'block';
+                localStorage.removeItem('token');
+                localStorage.removeItem('userId');
+            })
+        })
+    }
+
+
 
     //* 获取页面信息 
     async getInformation() {
@@ -191,15 +232,17 @@ class Information {
             if (status == 200 && data.code == 1) {
                 this.getCartList(num);
             }
+            // 如果状态不等于1 代表没有登录，清除之前的token和用户名
             if (data.code != 1) {
 
+                localStorage.removeItem('userId');
+                localStorage.removeItem('token');
+
                 location.hash = goodsId // 将hash值添加到链接的尾部，跳转的时候携带。
-
-                // console.log(location.href = "./information.html" + location.hash);
-                // location.href = "./information.html" + location.hash;
-                // sessionStorage.setItem('url', location.href);
-                // location.assign('./login.html');
-
+                    // console.log(location.href = "./information.html" + location.hash);
+                    // location.href = "./information.html" + location.hash;
+                    // sessionStorage.setItem('url', location.href);
+                    // location.assign('./login.html');
                 location.assign('./login.html?ReturnUrl=./information.html' + location.hash)
             }
         })
@@ -208,7 +251,7 @@ class Information {
 
     //* 获取购物车列表
     async getCartList(num) {
-        console.log(num);
+        // console.log(num);
         this.$('#tankuang').style.display = 'block';
         // 从地址栏中获取goodsId
         // let gId = location.hash.split('#')[1];
@@ -249,7 +292,7 @@ class Information {
                 </div>
             </div>
         </div>`;
-            // this.$('.num-input').value = val.cart_number + num;
+            this.$('.carttotal').innerHTML = 111;
         })
 
         this.$('#cartinfo').innerHTML = html;

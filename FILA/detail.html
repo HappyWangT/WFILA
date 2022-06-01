@@ -19,10 +19,15 @@
                 <button type="button">搜索</button>
             </div>
             <ul class="header-list">
-                <li><a href="login.html">登入</a></li>
-                <li>注册</li>
-                <li></li>
+                <li><a href="./login.html">登录</a></li>
+                <li><a href="./register.html">注册</a></li>
+                <li class="cartIcon"></li>
             </ul>
+
+            <div class="login">
+                <span class="welcome">欢迎加入！</span>
+                <span class="out">退出登录</span>
+            </div>
         </div>
     </header>
     <div class="content ">
@@ -116,9 +121,9 @@
                         </div>
                     </div>
                     <div class="pageBox">
-                        <span class="prev disable page-btn page-prev-btn">&lt;</span>
+                        <span class="prev disable page-btn page-prev-btn">上一页</span>
                         <span class="total">1 / 0</span>
-                        <span class="next page-btn page-next-btn">&gt;</span>
+                        <span class="next page-btn page-next-btn">下一页</span>
 
                     </div>
 
@@ -449,6 +454,8 @@
     <div class="web-cover">
         <a class="cover-kefu" href="" title="在线客服">客服</a>
     </div>
+    <script src="./lib/jquery-2.2.4.js"></script>
+    <script src="./lib/layer/layer.js"></script>
     <script src="./js/axios.js" type="text/javascript" charset="utf-8"></script>
     <script src="./js/detail.js" type="text/javascript" charset="utf-8"></script>
 </body>

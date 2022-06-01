@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>FILA｜斐乐官方网站(CN)</title>
+    <link rel="stylesheet" type="text/css" href="./css/register.css" />
+    <link rel="icon" type="image/x-icon" href="https://www.fila.cn/favicon.ico">
+</head>
+
+<body>
+    <header class="header">
+    </header>
+    <div class="content">
+        <div class="wrapper">
+            <div class="wrap">
+                <div id="layout" class="layout">
+
+                    <div class="login_area">
+                        <h5 class="login_mag">
+                            <span id="">
+									欢迎加入
+								</span>
+                            <img src="img/fila_blue_150.png">
+                        </h5>
+                        <div id="loginbox">
+                            <form class="lgn_input item " id="oForm" style="display: block;" action="login.php">
+                                <label class="labelBox">
+									<input type="text" value="" placeholder="昵称" class="nike"  name="nike"/>
+									<span>仅支持中文，长度为2-10</span>
+								</label>
+                                <label class="labelBox">
+										<input type="text" value="" placeholder="用户账号" class="tel"  name="Teld"/>
+										<span>字母数字下划线，长度为4-11</span>
+								</label>
+                                <label class="labelBox">
+											<input type="password" value="" placeholder="登录密码" class="pwd"  name="Passw"/>
+											<span>支持数字、字母、特殊字符，一种类型，弱。两种类型为中，三种类型为强，长度为6-20</span>
+								</label>
+                                <label class="labelBox">
+									<input type="password" value="" placeholder="重复密码" class="pwd2"  name="Passw2"/>
+									<span>必须与登录密码一致</span>
+								</label>
+
+                                <div class="inputbg" id="agree">
+                                    <label class="labelbox labelbox-agree ">
+										<input type="checkbox" name="agree" id="agree-check" checked>
+										我已充分阅读、理解并接受<a href="javascript:;" onclick="showAgreement(true);">隐私政策</a>的全部内容
+									</label>
+
+
+                                </div>
+                                <div id="err">
+                                    <div class="err_tip error-tip-2" id="error-outcon">
+                                        <div class="dis_box">
+                                            <em class="icon-gantanhao"></em><span id="error-content">请输入正确的注册手机号码</span>
+                                        </div>
+                                    </div>
+                                    <div class="err_tip error-tip-2 err-2" id="error-outcon">
+                                        <div class="dis_box">
+                                            <em class="icon-gantanhao"></em><span id="error-content">请输入注册手机号码</span>
+                                        </div>
+                                    </div>
+                                    <div class="err_tip error-tip-2 err-3" id="error-outcon">
+                                        <div class="dis_box">
+                                            <em class="icon-gantanhao"></em><span id="error-content">请输入图片验证码</span>
+                                        </div>
+                                    </div>
+                                    <div class="err_tip error-tip-2 err-4" id="error-outcon">
+                                        <div class="dis_box">
+                                            <em class="icon-gantanhao"></em><span id="error-content">验证码不正确</span>
+                                        </div>
+                                    </div>
+                                    <!-- 	<div class="err_tip error-tip-2 err-5" id="error-outcon">
+														<div class="dis_box">
+															<em class="icon-gantanhao"></em><span id="error-content">	请先阅读并接受隐私政策</span>
+														</div>
+													</div> -->
+
+                                </div>
+
+                                <div class="btns_bg">
+                                    <input class="btnadpt btns" type="button" id="submit_button" value="确认">
+                                </div>
+                            </form>
+                        </div>
+
+
+                        <p class="go-login"><a href="./login.html">已是会员？立即登录</a></p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+    <footer class="footer">
+        <div class="ft-left fl">
+            <ul class="link-list">
+                <li>购物服务</li>
+                <li>关于品牌</li>
+                <li>查找门店</li>
+            </ul>
+            <div class="ft-follow">
+                <span id="">
+						关注FILA的官方媒体
+					</span>
+                <a href="" class="ft-sina"></a>
+                <a href="" class="ft-weixin"></a>
+            </div>
+            <div class="ft-service"><span>售后服务电话:400-886-7699</span> </div>
+        </div>
+        <div class="ft-right fr">
+            <span>&copy;FILA体育&nbsp;闽ICP备11020421号-8&nbsp;闽公网安备35020302033807号</span>
+            <span>©2020 FILA Luxembourg S.à.r.l. - All Rights Reserved -</span>
+        </div>
+    </footer>
+    <div class="web-cover">
+        <a class="cover-kefu" href="" title="在线客服">客服</a>
+    </div>
+    <div id="alert">注册成功，正在跳转登录页</div>
+</body>
+
+</html>
+<script src="./js/axios.js"></script>
+<script src="./js/register.js"></script>
